@@ -4,6 +4,8 @@ public class RentalSystem {
     public void rentMovie(String customer,String customerId,String movie,int year,String director){}
     public void returnMovie(String customerId,String movie,int year,String director){}
     public void removeMovie(String movie,int year,String director){}
-    public void printMovies(){}
+    public void printMovies(){
+        System.out.println("dead is gay");
+    }
 
 }
