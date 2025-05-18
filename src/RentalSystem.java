@@ -5,7 +5,7 @@ public class RentalSystem {
     public void returnMovie(String customerId,String movie,int year,String director){}
     public void removeMovie(String movie,int year,String director){}
     public void printMovies(){
-        System.out.println("dean is gay");
+        System.out.println("mahdy is gay");
     }
 
 }
