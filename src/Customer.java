@@ -10,6 +10,20 @@ public class Customer {
         this.customerName = customerName;
         this.currentMovieIndex = 0;
     }
+    public int clientMovieIndex() {
+        return this.currentMovieIndex;
+    }
+    public String clientName(){
+        return this.customerName;
+    }
+
+    public String clientId(){
+        return this.customerId;
+    }
+
+    public Movie[] clientMovies(){
+        return this.currentMovies;
+    }
 
     public void show(){
         System.out.println("Name"+ customerName +",ID"+ customerId) ;
@@ -25,6 +39,15 @@ public class Customer {
             return true;
         }
         return false;
+    }
+
+    public static int findCustomer(String client,String customerId,Customer[] customers,int customerCounter){
+        for (int i = 0; i < customerCounter; i++ ){
+            if (client.equals(customers[i].clientName()) &&
+                    customerId.equals(customers[i].clientId())
+            ){return i;}
+        }
+        return -1;
     }
 
     public boolean returnMovie(Movie movie){
