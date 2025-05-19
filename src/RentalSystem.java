@@ -12,7 +12,7 @@ public class RentalSystem {
         Movie[] movies = new Movie[30];
         Director[] directors = new Director[30];
     }
-
+// dingdong
     public void addMovie(String movie,Genre genre,int year,String directorName,String biography){
 
         int knownDirector = Director.findDirector(directorName,directors);
