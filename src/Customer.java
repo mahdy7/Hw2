@@ -4,7 +4,7 @@ public class Customer {
     private Movie[] currentMovies;
     private int currentMovieIndex;
 
-    public Customer(String customerName,String customerId,Movie [] currentMovies) {
+    public Customer(String customerName,String customerId) {
         this.currentMovies = new Movie[5];
         this.customerId = customerId;
         this.customerName = customerName;
