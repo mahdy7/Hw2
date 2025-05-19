@@ -37,8 +37,28 @@ public class RentalSystem {
         this.movieCounter++;
     }
 
-    public void rentMovie(String customer,String customerId,String movie,int year,String director){}
-    public void returnMovie(String customerId,String movie,int year,String director){}
+    public void rentMovie(String customer,String customerId,String movie,int year,String director){
+
+            int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
+            if(movieIndex == -1){
+                System.out.println("No such movie exists.");
+                return;
+            }
+
+            else{
+                Customer client = new Customer(customer,customerId);
+                client.addMovie( this.movies[movieIndex]);
+                this.movies[movieIndex].rent(true);
+                this.movieCounter++;
+        }
+    }
+    public void returnMovie(String customerId,String movie,int year,String director){
+        int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
+        if(movieIndex == -1){
+            System.out.println("No such movie exists.");
+            return;
+        }
+    }
     public void removeMovie(String movie,int year,String director){}
     public void printMovies(){
     }
