@@ -40,7 +40,20 @@ public class RentalSystem {
     public void rentMovie(String customer,String customerId,String movie,int year,String director){}
     public void returnMovie(String customerId,String movie,int year,String director){}
     public void removeMovie(String movie,int year,String director){}
+
     public void printMovies(){
+        int rentedMoviesExist = -1, unrentedMoviesExist = -1;
+        for (int i = 0;i < movieCounter;i++) {
+            if (movies[i].isRented()) {
+                rentedMoviesExist = 1;
+            }
+            if (!movies[i].isRented()) {
+                unrentedMoviesExist = 1;
+            }
+
+        }
+        System.out.println("Rented movies:");
+        System.out.println("Unrented movies:");
     }
 
 }

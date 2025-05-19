@@ -1,7 +1,7 @@
 public class Customer {
     private String customerName;
     private String customerId;
-    private Movie [] currentMovies;
+    private Movie[] currentMovies;
     private int currentMovieIndex;
 
     public Customer(String customerName,String customerId,Movie [] currentMovies) {
