@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-
 public class Customer {
     private String customerName;
     private String customerId;
