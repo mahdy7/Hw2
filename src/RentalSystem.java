@@ -12,7 +12,7 @@ public class RentalSystem {
         Movie[] movies = new Movie[30];
         Director[] directors = new Director[30];
     }
-// dingdong
+
     public void addMovie(String movie,Genre genre,int year,String directorName,String biography){
 
         int knownDirector = Director.findDirector(directorName,directors);
@@ -59,21 +59,49 @@ public class RentalSystem {
             return;
         }
     }
-    public void removeMovie(String movie,int year,String director){}
+
+    public void removeMovie(String movie,int year,String director){
+        int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
+        //check if movie exist
+        if(movieIndex == -1){
+            System.out.println("No such movie exists.");
+            return;
+        }
+        // check if movie is rented
+        if (movies[movieIndex].isRented()){
+            System.out.println("Cannot remove a rented movie.");
+            return;
+        }
+        //removing the movie
+        movies[movieIndex] = movies[movieCounter];
+        movies[movieCounter] = null;
+        movieCounter--;
+    }
 
     public void printMovies(){
         int rentedMoviesExist = -1, unrentedMoviesExist = -1;
         for (int i = 0;i < movieCounter;i++) {
-            if (movies[i].isRented()) {
-                rentedMoviesExist = 1;
-            }
-            if (!movies[i].isRented()) {
-                unrentedMoviesExist = 1;
-            }
-
+            if (movies[i].isRented()) {rentedMoviesExist = 1;}
+            if (!movies[i].isRented()) {unrentedMoviesExist = 1;}
         }
-        System.out.println("Rented movies:");
-        System.out.println("Unrented movies:");
+
+        if (rentedMoviesExist == 1) {
+            System.out.println("Rented movies:");
+            for (int i = 0;i < movieCounter;i++) {
+                if (movies[i].isRented()) {
+                    movies[i].printMovie();
+                }
+            }
+        } else {System.out.println("No Rented movies.");}
+
+        if (unrentedMoviesExist == 1) {
+            System.out.println("Unrented movies:");
+            for (int i = 0;i < movieCounter;i++) {
+                if (!movies[i].isRented()) {
+                    movies[i].printMovie();
+                }
+            }
+        } else {System.out.println("No Unrented movies.");}
     }
 
 }
