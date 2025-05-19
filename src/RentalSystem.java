@@ -43,7 +43,7 @@ public class RentalSystem {
             if(movieIndex == -1){
                 System.out.println("No such movie exists.");
                 return;
-            }
+            }//mahdfeifej
 
             else{
                 Customer client = new Customer(customer,customerId);
