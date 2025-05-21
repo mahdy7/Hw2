@@ -37,9 +37,9 @@ public class Customer {
             this.currentMovieIndex++;
     }
 
-    public static int findCustomer(String clientName,String customerIdentity ,Customer[] customers,int customerCounter){
+    public static int findCustomer(String customerIdentity ,Customer[] customers,int customerCounter){
         for (int i = 0; i < customerCounter; i++ ){
-            if (clientName.equals(customers[i].clientName()) && customerIdentity.equals(customers[i].clientId()))
+            if (customerIdentity.equals(customers[i].clientId()))
             {return i;}
         }
         return -1;

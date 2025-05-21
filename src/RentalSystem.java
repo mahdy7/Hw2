@@ -45,7 +45,7 @@ public class RentalSystem {
                 System.out.println(" Customer cannot return the movie.");
                 return;
             }
-            int knownClient = Customer.findCustomer(customer,customerId,customers,customerCounter);
+            int knownClient = Customer.findCustomer(customerId,customers,customerCounter);
 
             if (knownClient == -1 && customerCounter < 30) { // if there is no such a customer, make new one.
                 customers[customerCounter]= new Customer(customer,customerId);
@@ -64,13 +64,13 @@ public class RentalSystem {
                 customers[knownClient].addMovie(this.movies[movieIndex]);
                 this.movies[movieIndex].rent(true);
             }
-            else{ // if tje customer has already 5 movies
+            else{ // if the customer has already 5 movies
                 System.out.println("The customer has reached the limit");
             }
 
     }
     public void returnMovie(String customerId,String movie,int year,String director){
-        int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
+        int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);//movie in general not found
         if(movieIndex == -1){
             System.out.println("No such movie exists.");
 
@@ -80,6 +80,7 @@ public class RentalSystem {
 
     public void removeMovie(String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
+        int noOtherDirector = 0, directorPlace = 0;
         //check if movie exist
         if(movieIndex == -1){
             System.out.println("No such movie exists.");
@@ -90,10 +91,23 @@ public class RentalSystem {
             System.out.println("Cannot remove a rented movie.");
             return;
         }
-        //removing the movie
-        movies[movieIndex] = movies[movieCounter];
-        movies[movieCounter] = null;
-        movieCounter--;
+        Director.removeDirector(directorCounter,movies, movieIndex,  directors, movieCounter);
+        /*
+        //removing the director
+        for(int i = 0;i < directorCounter;i++)
+        {
+            if(movies[movieIndex].movieDirector().equals(movies[i].movieDirector())){
+                directorPlace = i;
+                noOtherDirector++;
+            }
+        }
+        this.movies[movieIndex] = movies[movieCounter];
+        this.movies[movieCounter] = null;
+        this.movieCounter--;
+        if(noOtherDirector == 1){
+            this.directors[directorPlace] = directors[directorCounter-1];
+            this.directors[directorCounter-1] = null;
+        }*/
     }
 
     public void printMovies(){
