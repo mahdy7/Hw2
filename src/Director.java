@@ -15,6 +15,7 @@ public class Director {
         int counter = 0;
         if (directors == null) {return -1;}
         for (Director director : directors) {
+            if (director == null) {return -1;}
             if (director.getDirectorName().equals(directorName)) return counter;
             counter++;
         }
