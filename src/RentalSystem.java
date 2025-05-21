@@ -8,13 +8,14 @@ public class RentalSystem {
     private int directorCounter = 0;
 
     RentalSystem() {
-        Customer[] customers = new Customer[30];
-        Movie[] movies = new Movie[30];
-        Director[] directors = new Director[30];
+        this.customers = new Customer[30];
+        this.movies = new Movie[30];
+        this.directors = new Director[30];
     }
 
     public void addMovie(String movie,Genre genre,int year,String directorName,String biography){
 
+        //this is something wrong with genre
         int knownDirector = Director.findDirector(directorName,directors);
         if (knownDirector == -1) {
             directors[directorCounter] = new Director(directorName);
@@ -55,17 +56,19 @@ public class RentalSystem {
                     }
                 }
                 this.movies[movieIndex].rent(true);
-                this.movieCounter++;
             }
-            else{ // if tje customer has already 5 movies
+            else{ // if the customer has already 5 movies
                 System.out.println("The customer has reached the limit.");
             }
 
-            if (knownClient != -1 && customerCounter <= 30) { // if there is no such a customer, make new one.
+            if (knownClient == -1 && customerCounter <= 30) { // if there is no such a customer, make new one.
+
+                //always the value is not -1!!!!!!!!!!!!
+
                 Customer client = new Customer(customer,customerId);
                 client.addMovie( this.movies[movieIndex]);
                 this.movies[movieIndex].rent(true);
-                this.movieCounter++;
+
            }
             else{ // if there is more than 30 customers
                 System.out.println("No room for new customers.");
@@ -75,6 +78,10 @@ public class RentalSystem {
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
         if(movieIndex == -1){
             System.out.println("No such movie exists.");
+
+            //we should delete also the director and the customer.
+
+
             return;
         }
     }

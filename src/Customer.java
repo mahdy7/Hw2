@@ -32,23 +32,19 @@ public class Customer {
         }
     }
 
-    public boolean addMovie(Movie movie){
-        if(this.currentMovieIndex < 5){
+    public void addMovie(Movie movie){
             this.currentMovies[this.currentMovieIndex] = movie;
             this.currentMovieIndex++;
-            return true;
-        }
-        return false;
     }
 
-    public static int findCustomer(String client,String customerId,Customer[] customers,int customerCounter){
+    public static int findCustomer(String clientName,String customerIdentity ,Customer[] customers,int customerCounter){
         for (int i = 0; i < customerCounter; i++ ){
-            if (client.equals(customers[i].clientName()) &&
-                    customerId.equals(customers[i].clientId())
-            ){return i;}
+            if (clientName.equals(customers[i].clientName()) && customerIdentity.equals(customers[i].clientId()))
+            {return i;}
         }
         return -1;
     }
+
 
     public boolean returnMovie(Movie movie){
         for(int i = 0; i < this.currentMovieIndex; i++){

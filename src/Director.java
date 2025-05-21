@@ -13,6 +13,7 @@ public class Director {
     // implementation change??
     public static int findDirector(String directorName,Director[] directors){
         int counter = 0;
+        if (directors == null) {return -1;}
         for (Director director : directors) {
             if (director.getDirectorName().equals(directorName)) return counter;
             counter++;
