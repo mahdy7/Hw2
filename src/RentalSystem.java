@@ -42,7 +42,7 @@ public class RentalSystem {
 
             int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);//the movie is not registered
             if(movieIndex == -1){
-                System.out.println("No such movie exists.");
+                System.out.println(" Customer cannot return the movie.");
                 return;
             }
             int knownClient = Customer.findCustomer(customer,customerId,customers,customerCounter);
@@ -65,7 +65,7 @@ public class RentalSystem {
                 this.movies[movieIndex].rent(true);
             }
             else{ // if tje customer has already 5 movies
-                System.out.println("The customer has reached the limit.");
+                System.out.println("The customer has reached the limit");
             }
 
     }
@@ -104,7 +104,7 @@ public class RentalSystem {
         }
 
         if (rentedMoviesExist == 1) {
-            System.out.println("Rented movies:");
+            System.out.println("Rented Movies: ");
             for (int i = 0;i < movieCounter;i++) {
                 if (movies[i].isRented()) {
                     movies[i].printMovie();
@@ -113,7 +113,7 @@ public class RentalSystem {
         } else {System.out.println("No Rented movies.");}
 
         if (unrentedMoviesExist == 1) {
-            System.out.println("Unrented movies:");
+            System.out.println("Unrented Movies: ");
             for (int i = 0;i < movieCounter;i++) {
                 if (!movies[i].isRented()) {
                     movies[i].printMovie();

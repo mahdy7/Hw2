@@ -54,7 +54,7 @@ public class Movie {
 
     public void printMovie(){
         System.out.println("Title: " + this.title + ", Genre: " + this.genre + ", Year: "
-                + this.year + ", director: " + this.director.getDirectorName() + ".");
+                + this.year + ", director: " + this.director.getDirectorName());
     }
 
 }
