@@ -72,7 +72,8 @@ public class RentalSystem {
     public void returnMovie(String customerId,String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
         if(movieIndex == -1){
-            System.out.println("Customer cannot return the movie.");
+            System.out.println("No such movie exists.");
+
             return;
         }
 
@@ -89,6 +90,7 @@ public class RentalSystem {
 
     public void removeMovie(String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
+        int noOtherDirector = 0, directorPlace = 0;
         //check if movie exist
         if(movieIndex == -1){
             System.out.println("No such movie exists.");
@@ -99,10 +101,23 @@ public class RentalSystem {
             System.out.println("Cannot remove rented movie.");
             return;
         }
-        //removing the movie
-        movies[movieIndex] = movies[movieCounter-1];
-        movies[movieCounter] = null;
-        movieCounter--;
+        Director.removeDirector(directorCounter,movies, movieIndex,  directors, movieCounter);
+        /*
+        //removing the director
+        for(int i = 0;i < directorCounter;i++)
+        {
+            if(movies[movieIndex].movieDirector().equals(movies[i].movieDirector())){
+                directorPlace = i;
+                noOtherDirector++;
+            }
+        }
+        this.movies[movieIndex] = movies[movieCounter];
+        this.movies[movieCounter] = null;
+        this.movieCounter--;
+        if(noOtherDirector == 1){
+            this.directors[directorPlace] = directors[directorCounter-1];
+            this.directors[directorCounter-1] = null;
+        }*/
     }
 
     public void printMovies(){
