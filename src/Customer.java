@@ -25,6 +25,15 @@ public class Customer {
         return this.currentMovies;
     }
 
+    public void Unrent(Movie movie) {
+        for (int i = 0; i < this.currentMovieIndex; i++) {
+            if (this.currentMovies[i].equals(movie)) {
+                this.currentMovies[i] = currentMovies[currentMovieIndex-1];
+                currentMovies[currentMovieIndex-1] = null;
+            }
+        }
+    }
+
     public void show(){
         System.out.println("Name"+ customerName +",ID"+ customerId) ;
         for(int i = 0; i < this.currentMovieIndex; i++){
@@ -37,9 +46,9 @@ public class Customer {
             this.currentMovieIndex++;
     }
 
-    public static int findCustomer(String clientName,String customerIdentity ,Customer[] customers,int customerCounter){
+    public static int findCustomer(String customerIdentity ,Customer[] customers,int customerCounter){
         for (int i = 0; i < customerCounter; i++ ){
-            if (clientName.equals(customers[i].clientName()) && customerIdentity.equals(customers[i].clientId()))
+            if (customerIdentity.equals(customers[i].clientId()))
             {return i;}
         }
         return -1;

@@ -42,10 +42,10 @@ public class RentalSystem {
 
             int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);//the movie is not registered
             if(movieIndex == -1){
-                System.out.println(" Customer cannot return the movie.");
+                System.out.println("No such movie exists");
                 return;
             }
-            int knownClient = Customer.findCustomer(customer,customerId,customers,customerCounter);
+            int knownClient = Customer.findCustomer(customerId,customers,customerCounter);
 
             if (knownClient == -1 && customerCounter < 30) { // if there is no such a customer, make new one.
                 customers[customerCounter]= new Customer(customer,customerId);
@@ -72,10 +72,19 @@ public class RentalSystem {
     public void returnMovie(String customerId,String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
         if(movieIndex == -1){
-            System.out.println("No such movie exists.");
-
+            System.out.println("Customer cannot return the movie.");
             return;
         }
+
+        int currentCustomer = Customer.findCustomer(customerId,customers,customerCounter);
+        if (currentCustomer == -1){
+            System.out.println("Customer not found.");
+        }
+        if (!(customers[currentCustomer].returnMovie(this.movies[movieIndex]))){
+            System.out.println("Customer cannot return the movie.");
+        }
+        movies[movieIndex].rent(false);
+
     }
 
     public void removeMovie(String movie,int year,String director){
@@ -87,24 +96,25 @@ public class RentalSystem {
         }
         // check if movie is rented
         if (movies[movieIndex].isRented()){
-            System.out.println("Cannot remove a rented movie.");
+            System.out.println("Cannot remove rented movie.");
             return;
         }
         //removing the movie
-        movies[movieIndex] = movies[movieCounter];
+        movies[movieIndex] = movies[movieCounter-1];
         movies[movieCounter] = null;
         movieCounter--;
     }
 
     public void printMovies(){
-        int rentedMoviesExist = -1, unrentedMoviesExist = -1;
+       int rentedMoviesExist = -1, unrentedMoviesExist = -1;
+
         for (int i = 0;i < movieCounter;i++) {
             if (movies[i].isRented()) {rentedMoviesExist = 1;}
-            if (!movies[i].isRented()) {unrentedMoviesExist = 1;}
+            if (!(movies[i].isRented())) {unrentedMoviesExist = 1;}
         }
 
+        System.out.println("Rented Movies: ");
         if (rentedMoviesExist == 1) {
-            System.out.println("Rented Movies: ");
             for (int i = 0;i < movieCounter;i++) {
                 if (movies[i].isRented()) {
                     movies[i].printMovie();
@@ -112,8 +122,8 @@ public class RentalSystem {
             }
         } else {System.out.println("No Rented movies.");}
 
+        System.out.println("Unrented Movies: ");
         if (unrentedMoviesExist == 1) {
-            System.out.println("Unrented Movies: ");
             for (int i = 0;i < movieCounter;i++) {
                 if (!movies[i].isRented()) {
                     movies[i].printMovie();
