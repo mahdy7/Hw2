@@ -25,15 +25,6 @@ public class Customer {
         return this.currentMovies;
     }
 
-    public void Unrent(Movie movie) {
-        for (int i = 0; i < this.currentMovieIndex; i++) {
-            if (this.currentMovies[i].equals(movie)) {
-                this.currentMovies[i] = currentMovies[currentMovieIndex-1];
-                currentMovies[currentMovieIndex-1] = null;
-            }
-        }
-    }
-
     public void show(){
         System.out.println("Name"+ customerName +",ID"+ customerId) ;
         for(int i = 0; i < this.currentMovieIndex; i++){
@@ -55,16 +46,20 @@ public class Customer {
     }
 
 
-    public boolean returnMovie(Movie movie){
+    public int returnMovie(Movie movie,Customer[] customers,int customerCounter){
         for(int i = 0; i < this.currentMovieIndex; i++){
             if(this.currentMovies[i].equals(movie)){
                 this.currentMovies[i] = this.currentMovies[this.currentMovieIndex - 1];
                 //replacing the movie we removed with the last one;
                 this.currentMovies[this.currentMovieIndex-1] = null;
                 this.currentMovieIndex--;
-                return true;
+                if (this.currentMovieIndex == 0) {
+                    RentalSystem.removeCustomer(customers,this.customerId,customerCounter);
+                    return 0;
+                }
+                return 1;
             }
         }
-        return false;// if the movie wasn't found.
+        return -1;// if the movie wasn't found.
     }
 }

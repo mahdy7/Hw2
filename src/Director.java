@@ -29,16 +29,13 @@ public class Director {
     public static void removeDirector(int directorCounter,Movie [] movies,int movieIndex, Director[] directors,int movieCounter){
         int noOtherDirector = 0, directorPlace = 0;
         //removing the director
-        for(int i = 0;i < directorCounter;i++)
-        {
+        for(int i = 0;i < directorCounter;i++) {
             if(movies[movieIndex].movieDirector().equals(movies[i].movieDirector())){
                 directorPlace = i;
                 noOtherDirector++;
             }
         }
-        movies[movieIndex] = movies[movieCounter];
-        movies[movieCounter] = null;
-        movieCounter--;
+
         if(noOtherDirector == 1){
             directors[directorPlace] = directors[directorCounter-1];
             directors[directorCounter-1] = null;

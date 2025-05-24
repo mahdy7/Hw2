@@ -13,6 +13,12 @@ public class RentalSystem {
         this.directors = new Director[30];
     }
 
+    public static void removeCustomer(Customer[] customers,String customerId,int customerCounter) {
+        int customerIndex = Customer.findCustomer(customerId,customers,customerCounter);
+        customers[customerIndex] = customers[customerCounter-1];
+        customers[customerCounter-1] = null;
+    }
+
     public void addMovie(String movie,Genre genre,int year,String directorName,String biography){
 
         //this is something wrong with genre
@@ -40,52 +46,55 @@ public class RentalSystem {
 
     public void rentMovie(String customer,String customerId,String movie,int year,String director){
 
-            int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);//the movie is not registered
-            if(movieIndex == -1){
-                System.out.println("No such movie exists");
-                return;
-            }
-            int knownClient = Customer.findCustomer(customerId,customers,customerCounter);
+        int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);//the movie is not registered
+        if(movieIndex == -1){
+            System.out.println("No such movie exists");
+            return;
+        }
+        int knownClient = Customer.findCustomer(customerId,customers,customerCounter);
 
-            if (knownClient == -1 && customerCounter < 30) { // if there is no such a customer, make new one.
-                customers[customerCounter]= new Customer(customer,customerId);
-                knownClient = customerCounter;
-                customerCounter++;
-            }
-            else if (customerCounter == 30){ // if there is more than 30 customers
-                System.out.println("No room for new customers.");
-            }
-            if(Movie.findMovie(movie,year,director,customers[knownClient].clientMovies(),customers[knownClient].clientMovieIndex()) != -1){//find the movie if already exists
-                System.out.println("Customer already has this movie");
-                return;
-            }
+        if (knownClient == -1 && customerCounter < 30) { // if there is no such a customer, make new one.
+            customers[customerCounter]= new Customer(customer,customerId);
+            knownClient = customerCounter;
+            customerCounter++;
+        }
+        else if (customerCounter == 30){ // if there is more than 30 customers
+            System.out.println("No room for new customers.");
+        }
+        if(Movie.findMovie(movie,year,director,customers[knownClient].clientMovies(),customers[knownClient].clientMovieIndex()) != -1){//find the movie if already exists
+            System.out.println("Customer already has this movie");
+            return;
+        }
 
-            if(customers[knownClient].clientMovieIndex() < 5){ // if the movie is not in customer movie selection, add it.
-                customers[knownClient].addMovie(this.movies[movieIndex]);
-                this.movies[movieIndex].rent(true);
-            }
-            else{ // if tje customer has already 5 movies
-                System.out.println("The customer has reached the limit");
-            }
-
+        if(customers[knownClient].clientMovieIndex() < 5){ // if the movie is not in customer movie selection, add it.
+            customers[knownClient].addMovie(this.movies[movieIndex]);
+            this.movies[movieIndex].rent(true);
+        }
+        else{ // if the customer already has 5 movies
+            System.out.println("The customer has reached the limit");
+        }
     }
+
     public void returnMovie(String customerId,String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
         if(movieIndex == -1){
-            System.out.println("No such movie exists.");
-
+            System.out.println("Customer cannot return the movie.");
             return;
         }
 
         int currentCustomer = Customer.findCustomer(customerId,customers,customerCounter);
         if (currentCustomer == -1){
             System.out.println("Customer not found.");
+            return;
         }
-        if (!(customers[currentCustomer].returnMovie(this.movies[movieIndex]))){
-            System.out.println("Customer cannot return the movie.");
-        }
-        movies[movieIndex].rent(false);
 
+        int knownClient = customers[currentCustomer].returnMovie(this.movies[movieIndex],customers,customerCounter);
+        if (knownClient == -1){
+            System.out.println("Customer cannot return the movie.");
+            return;
+        } else if (knownClient == 0) {customerCounter--;}
+
+        movies[movieIndex].rent(false);
     }
 
     public void removeMovie(String movie,int year,String director){
