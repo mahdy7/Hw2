@@ -13,12 +13,29 @@ public class RentalSystem {
         this.directors = new Director[30];
     }
 
+    /**
+     * the function removes the customer from the system
+     *
+     * @param customers the customers that we have
+     * @param customerId the identity of the customer
+     * @param customerCounter the number of the customers
+     */
     public static void removeCustomer(Customer[] customers,String customerId,int customerCounter) {
         int customerIndex = Customer.findCustomer(customerId,customers,customerCounter);
         customers[customerIndex] = customers[customerCounter-1];
         customers[customerCounter-1] = null;
     }
 
+    /**
+     * this function add movie to the movies that we have, it deals with all the problems like if the director is already is
+     * in the system so we add the movie to him or if the movie is already in the system, or we don't have more space for more movies.
+     *
+     * @param movie the movie we want to add
+     * @param genre the genre of the movie
+     * @param year the year of the movie
+     * @param directorName the name of the director who made that movie
+     * @param biography the biography of the director
+     */
     public void addMovie(String movie,Genre genre,int year,String directorName,String biography){
 
         //this is something wrong with genre
@@ -44,6 +61,17 @@ public class RentalSystem {
         this.movieCounter++;
     }
 
+    /**
+     * this function allows the customer to rent a movie, checks if the movie exist or the there is on new room for
+     * customer or the customer have enough movies or the customer already has this movie, if non of them is valid
+     * the function let the customer rent the movie.
+     *
+     * @param customer the customer that wants to rent the movie
+     * @param customerId the identity of the customer
+     * @param movie the movie the customer want to return
+     * @param year the year when the movie was released
+     * @param director the director's name
+     */
     public void rentMovie(String customer,String customerId,String movie,int year,String director){
 
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
@@ -75,6 +103,15 @@ public class RentalSystem {
         }
     }
 
+    /**
+     * this function, returns the rented movie from the customer, it deals with with problems, such as the customer is not found
+     * or the customer is already not renting the movie.
+     *
+     * @param customerId the id of the customer
+     * @param movie name of the movie
+     * @param year the release year of the movie
+     * @param director the director of the movie
+     */
     public void returnMovie(String customerId,String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
         if(movieIndex == -1){
@@ -97,6 +134,14 @@ public class RentalSystem {
         movies[movieIndex].rent(false);
     }
 
+    /**
+     * this function basically removes the movie from system,it deals with situations like if the movie doesn't exist
+     * or if the movie is rented its acceptable to remove or if the director has only this movie we should delete the director
+     *
+     * @param movie the movie we want to remove
+     * @param year the year of the movie was made
+     * @param director the director of the movie
+     */
     public void removeMovie(String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
         if(movieIndex == -1){
@@ -114,6 +159,9 @@ public class RentalSystem {
         this.movieCounter--;
     }
 
+    /**
+     * prints all the movies sorted in way where all the rented movies and all the unrented.
+     */
     public void printMovies(){
        int rentedMoviesExist = -1, unrentedMoviesExist = -1;
 
