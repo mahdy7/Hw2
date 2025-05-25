@@ -26,19 +26,19 @@ public class Director {
         return this.directorName.equals(director.getDirectorName());
     }
 
-    public static void removeDirector(int directorCounter,Movie [] movies,int movieIndex, Director[] directors,int movieCounter){
-        int noOtherDirector = 0, directorPlace = 0;
+    public static void removeDirector(int movieCounter,Movie [] movies,int movieIndex, Director[] directors){
+        int noOtherDirector = 0;
         //removing the director
-        for(int i = 0;i < directorCounter;i++) {
+        for(int i = 0;i < movieCounter;i++) {
             if(movies[movieIndex].movieDirector().equals(movies[i].movieDirector())){
-                directorPlace = i;
                 noOtherDirector++;
             }
         }
 
         if(noOtherDirector == 1){
-            directors[directorPlace] = directors[directorCounter-1];
-            directors[directorCounter-1] = null;
+            int directorIndex= Director.findDirector(movies[movieIndex].movieDirector().getDirectorName(),directors);
+            directors[directorIndex] = directors[directorIndex-1];
+            directors[directorIndex-1] = null;
         }
     }
 

@@ -110,23 +110,12 @@ public class RentalSystem {
             System.out.println("Cannot remove rented movie.");
             return;
         }
-        Director.removeDirector(directorCounter,movies, movieIndex,  directors, movieCounter);
-        /*
-        //removing the director
-        for(int i = 0;i < directorCounter;i++)
-        {
-            if(movies[movieIndex].movieDirector().equals(movies[i].movieDirector())){
-                directorPlace = i;
-                noOtherDirector++;
-            }
-        }
-        this.movies[movieIndex] = movies[movieCounter];
-        this.movies[movieCounter] = null;
+        //removing the director in case there isn't any movies he directed anymore
+        Director.removeDirector(movieCounter, movies, movieIndex, directors);
+
+        this.movies[movieIndex] = movies[movieCounter-1];
+        this.movies[movieCounter-1] = null;
         this.movieCounter--;
-        if(noOtherDirector == 1){
-            this.directors[directorPlace] = directors[directorCounter-1];
-            this.directors[directorCounter-1] = null;
-        }*/
     }
 
     public void printMovies(){
