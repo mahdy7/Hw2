@@ -99,7 +99,6 @@ public class RentalSystem {
 
     public void removeMovie(String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
-        int noOtherDirector = 0, directorPlace = 0;
         //check if movie exist
         if(movieIndex == -1){
             System.out.println("No such movie exists.");
