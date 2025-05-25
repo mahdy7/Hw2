@@ -1,0 +1,38 @@
+Test 1: Rent more than the allowed number of movies
+The customer has reached the limit
+Customer already has this movie
+Rented Movies: 
+Title: Inception, Genre: SCIENCE_FICTION, Year: 2010, director: Christopher Nolan
+Title: The Dark Knight, Genre: ACTION, Year: 2008, director: Christopher Nolan
+Title: Interstellar, Genre: SCIENCE_FICTION, Year: 2014, director: Christopher Nolan
+Title: Dunkirk, Genre: ACTION, Year: 2017, director: Christopher Nolan
+Title: Tenet, Genre: ACTION, Year: 2020, director: Christopher Nolan
+Unrented Movies: 
+Title: Memento, Genre: DRAMA, Year: 2000, director: Christopher Nolan
+Title: Prestige, Genre: DRAMA, Year: 2006, director: Christopher Nolan
+
+Test 2: Return a movie that is not in the system
+No such movie exists.
+Rented Movies: 
+Title: Inception, Genre: SCIENCE_FICTION, Year: 2010, director: Christopher Nolan
+Unrented Movies: 
+Title: The Dark Knight, Genre: ACTION, Year: 2008, director: Christopher Nolan
+Title: Interstellar, Genre: SCIENCE_FICTION, Year: 2014, director: Christopher Nolan
+
+Test 3: Add a duplicate movie
+Movie is already in the system.
+Movie is already in the system.
+No Rented movies.
+Unrented Movies: 
+Title: Inception, Genre: SCIENCE_FICTION, Year: 2010, director: Christopher Nolan
+Title: The Dark Knight, Genre: ACTION, Year: 2008, director: Christopher Nolan
+
+Test 4: Remove a rented or non-existent movie
+Cannot remove a rented movie.
+No such movie exists.
+Cannot remove a rented movie.
+Rented Movies: 
+Title: Inception, Genre: SCIENCE_FICTION, Year: 2010, director: Christopher Nolan
+Unrented Movies: 
+Title: The Dark Knight, Genre: ACTION, Year: 2008, director: Christopher Nolan
+Title: Interstellar, Genre: SCIENCE_FICTION, Year: 2014, director: Christopher Nolan
