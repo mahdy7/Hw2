@@ -7,6 +7,7 @@ public class Movie {
 
     /**
      * constructs the movie object
+     *
      * @param title the name of the movie.
      * @param genre its genre.
      * @param year the year it was released in.
@@ -63,7 +64,6 @@ public class Movie {
 
     /**
      * finds a movie object in the movies array using only the movie's name ,its release year and its directors name
-     *
      *
      * @param movieName the name of the movie
      * @param year the year the movie was released

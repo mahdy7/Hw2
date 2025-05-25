@@ -7,6 +7,9 @@ public class RentalSystem {
     private int customerCounter= 0;
     private int directorCounter = 0;
 
+    /**
+     * constructs the rentalSystem
+     */
     RentalSystem() {
         this.customers = new Customer[30];
         this.movies = new Movie[30];
@@ -14,7 +17,7 @@ public class RentalSystem {
     }
 
     /**
-     * the function removes the customer from the system
+     * removes the customer from the system
      *
      * @param customers the customers that we have
      * @param customerId the identity of the customer
@@ -27,8 +30,8 @@ public class RentalSystem {
     }
 
     /**
-     * this function add movie to the movies that we have, it deals with all the problems like if the director is already is
-     * in the system so we add the movie to him or if the movie is already in the system, or we don't have more space for more movies.
+     * adds a movie to the movies array,if the director is already in the system the movie points to him in his properties,
+     * if not a new director object is made, in case the movies array is full we don't add a movie
      *
      * @param movie the movie we want to add
      * @param genre the genre of the movie
@@ -38,7 +41,6 @@ public class RentalSystem {
      */
     public void addMovie(String movie,Genre genre,int year,String directorName,String biography){
 
-        //this is something wrong with genre
         int knownDirector = Director.findDirector(directorName,directors);
         if (knownDirector == -1) {
             directors[directorCounter] = new Director(directorName);
@@ -62,9 +64,8 @@ public class RentalSystem {
     }
 
     /**
-     * this function allows the customer to rent a movie, checks if the movie exist or the there is on new room for
-     * customer or the customer have enough movies or the customer already has this movie, if non of them is valid
-     * the function let the customer rent the movie.
+     * allows the customer to rent a movie if it exists, or not if there is no new room for the customer
+     * or the customer rented enough movies or the customer already has this movie
      *
      * @param customer the customer that wants to rent the movie
      * @param customerId the identity of the customer
@@ -104,8 +105,8 @@ public class RentalSystem {
     }
 
     /**
-     * this function, returns the rented movie from the customer, it deals with with problems, such as the customer is not found
-     * or the customer is already not renting the movie.
+     * returns the rented movie from the customer if the customer is found
+     * ,and he is renting the movie.
      *
      * @param customerId the id of the customer
      * @param movie name of the movie
@@ -135,8 +136,8 @@ public class RentalSystem {
     }
 
     /**
-     * this function basically removes the movie from system,it deals with situations like if the movie doesn't exist
-     * or if the movie is rented its acceptable to remove or if the director has only this movie we should delete the director
+     * removes the movie from system,it deals with situations like if the movie doesn't exist
+     * or if the movie is rented it's acceptable to remove or if the director has only this movie we should delete the director
      *
      * @param movie the movie we want to remove
      * @param year the year of the movie was made
@@ -160,7 +161,7 @@ public class RentalSystem {
     }
 
     /**
-     * prints all the movies sorted in way where all the rented movies and all the unrented.
+     * prints all the movies sored in two lists: Rented and Unrented
      */
     public void printMovies(){
        int rentedMoviesExist = -1, unrentedMoviesExist = -1;

@@ -12,12 +12,10 @@ public class Director {
 
     /**
      * finds a director object from a given array using only the director's name
-     * returns the index of the director in the array
-     * in case the director isn't found returns -1
      *
      * @param directorName the wanted director's name
      * @param directors the array of directors
-     * @return directors index (-1 if not found)
+     * @return director's index (-1 if not found)
      */
     public static int findDirector(String directorName,Director[] directors){
         int counter = 0;

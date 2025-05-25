@@ -26,7 +26,7 @@ public class Customer {
     }
 
     /**
-     * shows that customer name and the his id and then print all of his movies
+     * prints the customer's name and his id , then prints all the movies he rented
      */
     public void show(){
         System.out.println("Name"+ customerName +",ID"+ customerId) ;
@@ -36,8 +36,8 @@ public class Customer {
     }
 
     /**
-     * the func adds movie to customer rented already movies
-     * @param movie the movie that customer want to rent
+     * adds the movie to the customer's rented movies array
+     * @param movie the movie that the customer wants to rent
      */
     public void addMovie(Movie movie){
             this.currentMovies[this.currentMovieIndex] = movie;
@@ -45,11 +45,11 @@ public class Customer {
     }
 
     /**
-     * the function search in the system for specif customer and return the index of it
-     * @param customerIdentity the customer identity that we want to find
-     * @param customers all the customer we have
+     * search the customers array for a specif customer and returns its index
+     * @param customerIdentity the customer's id
+     * @param customers the array of customers
      * @param customerCounter how many customers we have
-     * @return or the customer indeex in the the system or -1 where there is no such a customer.
+     * @return the customer's index in the array or -1 when there is no such customer.
      */
     public static int findCustomer(String customerIdentity ,Customer[] customers,int customerCounter){
         for (int i = 0; i < customerCounter; i++ ){
@@ -60,19 +60,18 @@ public class Customer {
     }
 
     /**
-     * the function search for a movie in the system and allow to return a movie that the customer already rented
-     * it takes care of all the situation if the movie is not found
+     * searches for a movie in the system and returns the movie if the customer was renting it
      *
-     * @param movie the movie that customer want to return
-     * @param customers all the customers we have.
+     * @param movie the movie that the customer wants to return
+     * @param customers the array of the customers
      * @param customerCounter the number of customers we have
-     * @return if the movie found zero that means the movie was returned and the movie is not found the function return a -1.
+     * @return -1 if the movie wasn't found, 0 if we need to remove the customer from the system
+     * ,1 if the movie is found and there is no need to delete the customer
      */
     public int returnMovie(Movie movie,Customer[] customers,int customerCounter){
         for(int i = 0; i < this.currentMovieIndex; i++){
             if(this.currentMovies[i].equals(movie)){
                 this.currentMovies[i] = this.currentMovies[this.currentMovieIndex - 1];
-                //replacing the movie we removed with the last one;
                 this.currentMovies[this.currentMovieIndex-1] = null;
                 this.currentMovieIndex--;
                 if (this.currentMovieIndex == 0) {
@@ -82,6 +81,6 @@ public class Customer {
                 return 1;
             }
         }
-        return -1;// if the movie wasn't found.
+        return -1;
     }
 }
