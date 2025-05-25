@@ -46,31 +46,31 @@ public class RentalSystem {
 
     public void rentMovie(String customer,String customerId,String movie,int year,String director){
 
-        int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);//the movie is not registered
+        int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
         if(movieIndex == -1){
             System.out.println("No such movie exists");
             return;
         }
         int knownClient = Customer.findCustomer(customerId,customers,customerCounter);
 
-        if (knownClient == -1 && customerCounter < 30) { // if there is no such a customer, make new one.
+        if (knownClient == -1 && customerCounter < 30) {
             customers[customerCounter]= new Customer(customer,customerId);
             knownClient = customerCounter;
             customerCounter++;
         }
-        else if (customerCounter == 30){ // if there is more than 30 customers
+        else if (customerCounter == 30){
             System.out.println("No room for new customers.");
         }
-        if(Movie.findMovie(movie,year,director,customers[knownClient].clientMovies(),customers[knownClient].clientMovieIndex()) != -1){//find the movie if already exists
+        if(Movie.findMovie(movie,year,director,customers[knownClient].clientMovies(),customers[knownClient].clientMovieIndex()) != -1){
             System.out.println("Customer already has this movie");
             return;
         }
 
-        if(customers[knownClient].clientMovieIndex() < 5){ // if the movie is not in customer movie selection, add it.
+        if(customers[knownClient].clientMovieIndex() < 5){
             customers[knownClient].addMovie(this.movies[movieIndex]);
             this.movies[movieIndex].rent(true);
         }
-        else{ // if the customer already has 5 movies
+        else{
             System.out.println("The customer has reached the limit");
         }
     }
@@ -99,17 +99,14 @@ public class RentalSystem {
 
     public void removeMovie(String movie,int year,String director){
         int movieIndex = Movie.findMovie(movie,year,director,movies,movieCounter);
-        //check if movie exist
         if(movieIndex == -1){
             System.out.println("No such movie exists.");
             return;
         }
-        // check if movie is rented
         if (movies[movieIndex].isRented()){
             System.out.println("Cannot remove rented movie.");
             return;
         }
-        //removing the director in case there isn't any movies he directed anymore
         Director.removeDirector(movieCounter, movies, movieIndex, directors);
 
         this.movies[movieIndex] = movies[movieCounter-1];
