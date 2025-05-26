@@ -1,5 +1,6 @@
 public class RentalSystem {
-
+    public static final int MAX_CAPACITY = 30;
+    public static final int MAX_RENTED_MOVIES = 5;
     private Customer[] customers;
     private Movie[] movies;
     private Director[] directors;
@@ -11,9 +12,9 @@ public class RentalSystem {
      * constructs the rentalSystem
      */
     RentalSystem() {
-        this.customers = new Customer[30];
-        this.movies = new Movie[30];
-        this.directors = new Director[30];
+        this.customers = new Customer[MAX_CAPACITY];
+        this.movies = new Movie[MAX_CAPACITY];
+        this.directors = new Director[MAX_CAPACITY];
     }
 
     /**
@@ -54,7 +55,7 @@ public class RentalSystem {
             System.out.println("Movie is already in the system.");
             return;
         }
-        else if (this.movieCounter == 30){
+        else if (this.movieCounter == MAX_CAPACITY) {
             System.out.println("System is full, Cannot add more movies.");
             return;
         }
@@ -82,12 +83,12 @@ public class RentalSystem {
         }
         int knownClient = Customer.findCustomer(customerId,customers,customerCounter);
 
-        if (knownClient == -1 && customerCounter < 30) {
+        if (knownClient == -1 && customerCounter < MAX_CAPACITY) {
             customers[customerCounter]= new Customer(customer,customerId);
             knownClient = customerCounter;
             customerCounter++;
         }
-        else if (customerCounter == 30){
+        else if (customerCounter == MAX_CAPACITY){
             System.out.println("No room for new customers.");
         }
         if(Movie.findMovie(movie,year,director,customers[knownClient].clientMovies(),customers[knownClient].clientMovieIndex()) != -1){
@@ -95,7 +96,7 @@ public class RentalSystem {
             return;
         }
 
-        if(customers[knownClient].clientMovieIndex() < 5){
+        if(customers[knownClient].clientMovieIndex() < MAX_CAPACITY) {
             customers[knownClient].addMovie(this.movies[movieIndex]);
             this.movies[movieIndex].rent(true);
         }

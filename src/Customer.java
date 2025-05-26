@@ -1,11 +1,12 @@
 public class Customer {
+    public static final int MAX_RENTED_MOVIES = 5;
     private String customerName;
     private String customerId;
     private Movie[] currentMovies;
     private int currentMovieIndex;
 
     public Customer(String customerName,String customerId) {
-        this.currentMovies = new Movie[5];
+        this.currentMovies = new Movie[MAX_RENTED_MOVIES];
         this.customerId = customerId;
         this.customerName = customerName;
         this.currentMovieIndex = 0;

@@ -2,7 +2,7 @@ public class Director {
 
     private String directorName;
 
-    Director(String directorName){
+    Director(String directorName) {
         this.directorName = directorName;
     }
 
