@@ -44,7 +44,7 @@ public class RentalSystem {
 
         int knownDirector = Director.findDirector(directorName,directors);
         if (knownDirector == -1) {
-            directors[directorCounter] = new Director(directorName);
+            directors[directorCounter] = new Director(directorName,biography);
             knownDirector = directorCounter;
             directorCounter++;
         }
@@ -96,7 +96,7 @@ public class RentalSystem {
             return;
         }
 
-        if(customers[knownClient].clientMovieIndex() < MAX_CAPACITY) {
+        if(customers[knownClient].clientMovieIndex() < MAX_RENTED_MOVIES) {
             customers[knownClient].addMovie(this.movies[movieIndex]);
             this.movies[movieIndex].rent(true);
         }

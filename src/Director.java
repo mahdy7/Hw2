@@ -1,9 +1,11 @@
 public class Director {
 
     private String directorName;
+    private String biography;
 
-    Director(String directorName) {
+    Director(String directorName, String biography) {
         this.directorName = directorName;
+        this.biography = biography;
     }
 
     public String getDirectorName() {
